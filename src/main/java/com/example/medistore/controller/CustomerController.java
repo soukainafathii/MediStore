@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("customers")
 public class CustomerController {
 
     @Autowired
@@ -17,45 +17,50 @@ public class CustomerController {
 
 
     ////////////////////////////////// Add customers ///////////////////////////
-    @PostMapping("/addCustomer")
+    @PostMapping
     public Customer addCustomer(@RequestBody Customer customer){
         return customerService.addCustomer(customer);
     }
 
-    @PostMapping("/addCustomers")
-    public List<Customer> addCustomers(@RequestBody List<Customer> customers){
-        return customerService.addCustomers(customers);
-    }
 
     ////////////////////////////////// Get customers ///////////////////////////
-    @GetMapping("/get")
+    @GetMapping
     public List<Customer> getCustomers(){
         return customerService.getCustomers();
     }
 
-    @GetMapping("/getAll/{id}")
+    @GetMapping("id-{id}")
     public Customer getCustomerById(@PathVariable long id){
         return customerService.getCustomerById(id);
     }
 
-    @GetMapping("/getName/{name}")
+    @GetMapping("name-{name}")
     public Customer getCustomerByName(@PathVariable String name){
         return customerService.getCustomerByName(name);
     }
 
 
     ////////////////////////////// update customer ///////////////////////////
-    @PutMapping("/update")
+    @PutMapping
     public Customer updateCustomer(@RequestBody Customer customer){
         return customerService.updateCustomer(customer);
     }
 
 
     ////////////////////////////// delete customer ///////////////////////////
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteCustomer(@PathVariable long id){
         return customerService.deleteCustomer(id);
     }
+
+
+
+
+    @PostMapping("/all")
+    public List<Customer> addCustomers(@RequestBody List<Customer> customers){
+        return customerService.addCustomers(customers);
+    }
+
 
 
 

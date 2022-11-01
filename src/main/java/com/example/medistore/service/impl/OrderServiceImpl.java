@@ -15,6 +15,10 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
 
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     ////////////////////////////////// save Order ///////////////////////////////
     //Save one Order
     public Order addOrder(Order order){

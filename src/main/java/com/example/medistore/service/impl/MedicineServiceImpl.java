@@ -1,6 +1,7 @@
 package com.example.medistore.service.impl;
 
 
+import com.example.medistore.aspects.Loggable;
 import com.example.medistore.dao.MedicineRepository;
 import com.example.medistore.model.Medicine;
 import com.example.medistore.service.MedicineService;
@@ -14,6 +15,10 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Autowired
     MedicineRepository medicineRepository;
+
+    public void setMedicineRepository(MedicineRepository medicineRepository) {
+        this.medicineRepository = medicineRepository;
+    }
 
     ////////////////////////////////// save medicine ///////////////////////////////
     //Save one medicine
@@ -58,7 +63,10 @@ public class MedicineServiceImpl implements MedicineService {
         return medicineRepository.save(existingMedicine);
     }
 
-
+    @Loggable
+    public void setData(String data){
+        System.out.println(data);
+    }
 
 
 }

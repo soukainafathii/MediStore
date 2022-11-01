@@ -9,31 +9,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("order")
+@RequestMapping("orders")
 public class OrderController {
 
-    @Autowired
+
     OrderService orderService;
 
+    @Autowired
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    public OrderService getOrderService() {
+        return orderService;
+    }
+
     ////////////////////////////////// Add Orders ///////////////////////////
-    @PostMapping("/addOrder")
+    @PostMapping("/")
     public Order addOrder(@RequestBody Order Order){
         return orderService.addOrder(Order);
     }
 
 
-    @PostMapping("/addOrders")
+    @PostMapping("/all")
     public List<Order> addOrders(@RequestBody List<Order> orders){
         return orderService.addOrders(orders);
     }
 
     ////////////////////////////////// Get Orders ///////////////////////////
-    @GetMapping("/get")
+    @GetMapping("/")
     public List<Order> getOrders(){
         return orderService.getOrders();
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public Order getOrderById(@PathVariable long id){
         return orderService.getOrderById(id);
     }
@@ -42,14 +51,14 @@ public class OrderController {
 
 
     ////////////////////////////// update Order ///////////////////////////
-    @PutMapping("/update")
+    @PutMapping("/")
     public Order updateOrder(@RequestBody Order order){
         return orderService.updateOrder(order);
     }
 
 
     ////////////////////////////// delete Order ///////////////////////////
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteOrder(@PathVariable long id){
         return orderService.deleteOrder(id);
     }

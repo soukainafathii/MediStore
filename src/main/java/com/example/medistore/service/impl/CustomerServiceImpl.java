@@ -5,7 +5,6 @@ import com.example.medistore.dao.CustomerRepository;
 import com.example.medistore.model.Customer;
 import com.example.medistore.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,15 +12,19 @@ import java.util.List;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+    public CustomerServiceImpl() {
+    }
+
     @Autowired
     CustomerRepository customerRepository;
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     ////////////////////////////////// save customer ///////////////////////////////
     //Save one customer
     public Customer addCustomer(Customer customer){
+
+        System.out.println("im here ");
         return customerRepository.save(customer);
     }
 
@@ -56,15 +59,29 @@ public class CustomerServiceImpl implements CustomerService {
 
     ////////////////////////////////// update customer ///////////////////////////////
     public Customer updateCustomer(Customer customer){
-        Customer existingCustomer= customerRepository.findById(customer.getId()).orElse(null);
+        //Customer existingCustomer= customerRepository.findById(customer.getId()).orElse(null);
 
-        existingCustomer.setId(customer.getId());
-        existingCustomer.setName(customer.getName());
-        existingCustomer.setAddress(customer.getAddress());
-        existingCustomer.setPhone(customer.getPhone());
+        /*
+        customer.setId(customer.getId());
+        customer.setName(customer.getName());
+        customer.setAddress(customer.getAddress());
+        customer.setPhone(customer.getPhone());
+        customer.setUsername(customer.getUsername());
+        customer.setPassword(customer.getPassword());*/
 
-        return customerRepository.save(existingCustomer);
+        return customerRepository.save(customer);
     }
+
+    //method for aspect
+    public String getData(){
+        return "get data of customer service is called successfully";
+    }
+
+    public void setData(String data){
+        System.out.println(data);
+    }
+
+
 
 
 

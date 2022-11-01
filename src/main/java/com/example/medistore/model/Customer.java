@@ -1,18 +1,23 @@
 package com.example.medistore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Entity
+@Builder
 @Table(name="customer")
 @Data
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,22 +34,16 @@ public class Customer {
     private int phone;
 
     @Column(nullable = false)
-    private String email;
+    private String username;
 
     @Column(nullable = false )
     private String password;
-
 
 
     // 39li 3la hadi
     @OneToMany (fetch = FetchType.LAZY)
     @JoinColumn (name = "customer_id", referencedColumnName = "customer_id")
     private Set<Order> orders = new HashSet<>();
-
-
-
-
-
 
     //relation mapping between medicine and customer
     @JsonIgnore
